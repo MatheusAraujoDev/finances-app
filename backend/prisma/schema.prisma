@@ -25,7 +25,7 @@ model Transaction {
   amount       Float
   description  String
   category     String
-  date         DateTime
+  date         String
   User         User?   @relation(fields: [userId], references: [id])
   userId       String
 

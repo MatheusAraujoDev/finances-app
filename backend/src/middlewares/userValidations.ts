@@ -3,7 +3,7 @@ import Joi from "joi";
 export const validateUser = (name, email, password) =>  {
   const schema = Joi.object({
     name: Joi.string().required(),
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'yahoo', 'gmail', 'hotmail'] } }).required(),
     password: Joi.string().required(),
   });
 

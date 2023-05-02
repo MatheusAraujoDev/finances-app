@@ -1,31 +1,31 @@
-import axios from "axios"
-import { GetStaticProps } from "next"
+import { useEffect, useState } from "react"
+
+// interface ITransaction {
+//   amount: number
+//   description: string
+//   category: string
+//   date: string
+//   userId: string
+// }
 
 
-interface ITransaction {
-  amount: number
-  description: string
-  category: string
-  date: string
-  userId: string
-}
+// interface HomeProps {
+//   transactions: ITransaction[];
+// }
 
-interface HomeProps {
-  transactions: ITransaction[];
-}
+// export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+//   const response = await axios.get<ITransaction[]>('http://localhost:3001/transactions');
+//   const transactions = response.data;
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const response = await axios.get<ITransaction[]>('http://localhost:3001/transactions');
-  const transactions = response.data;
+//   return {
+//     props: {
+//       transactions
+//     }
+//   }
+// }
 
-  return {
-    props: {
-      transactions
-    }
-  }
-}
-
-export default function index({ transactions }: HomeProps) {
+export default function index() {    // { transactions }: HomeProps
+  const [userName, setUserName] = useState<string | null>('')
   // const [transactions, setTransactions] = useState<ITransaction[]>([])
 
   // useEffect(() => {
@@ -36,23 +36,28 @@ export default function index({ transactions }: HomeProps) {
   //     setTransactions(transactionDescriptions)
   //   })
   // }, [])
+  useEffect(() => {
+    setUserName(localStorage.getItem("finances-userName"))
+  }, [])
+
 
 
 
   return (
     <>
       <h1>DASHBOARD</h1>
+      <h1>Olá, <b>{userName}</b></h1>
       {/* <ul className="list-disc p-10">
         {
           transactions.length > 0 && transactions.map(item => <li key={item.description}>{item.description}</li>)
         }
       </ul> */}
 
-      <ul className="list-disc p-10">
+      {/* <ul className="list-disc p-10">
         {
           transactions.length > 0 && transactions.map(item => <li key={item.description}>{item.description}</li>)
         }
-      </ul>
+      </ul> */}
     </>
   )
 }

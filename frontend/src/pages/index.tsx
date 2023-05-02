@@ -1,34 +1,21 @@
-import Link from "next/link";
+import { useState } from 'react';
+import AccountForm from "src/components/AccountForm";
 
 export default function Home() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   return (
-    <div className="h-screen w-full bg-purple-900 flex justify-center items-center">
-    <div className="w-full max-w-2xl">
-      <form className="bg-white rounded px-8 pt-6 pb-8 mb-4">
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-            E-mail
-          </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" autoFocus placeholder="Username" />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-            Password
-          </label>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********" />
-        </div>
-        <div className="flex items-center justify-between">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-            Login
-          </button>
-          <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-            <Link href="/register">
-              Criar Conta
-            </Link>
-          </button>
-        </div>
-      </form>
-      </div>
+    <div className="bg-purple-900 h-screen flex flex-col items-center py-12 gap-10">
+      <img src="/undraw_savings_re_eq4w.svg" alt="teste" height={250} width={250} />
+      <h1 className="text-white text-4xl">Login</h1>
+      <AccountForm
+        onEmailChange={(e) => setEmail(e.target.value)}
+        onPasswordChange={(e) => setPassword(e.target.value)}
+        onSubmit={() => {
+          console.log('teste')
+        }}
+      />
     </div>
     
   )

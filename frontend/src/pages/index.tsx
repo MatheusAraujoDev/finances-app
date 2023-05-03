@@ -20,7 +20,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="bg-purple-900 h-screen flex flex-col items-center py-12 gap-10">
+    <div className="bg-purple-900 h-screen flex flex-col items-center py-14 gap-8">
       <img src="/undraw_savings_re_eq4w.svg" alt="teste" height={250} width={250} />
       <h1 className="text-white text-4xl">Login</h1>
       <ToastContainer />
@@ -47,7 +47,7 @@ export default function Home() {
             localStorage.setItem("finances-userName", userName)
 
             if(response.status === 200) {
-              router.push("/dashboard")
+              router.push("/wallet")
             }
           
           } catch (error) {

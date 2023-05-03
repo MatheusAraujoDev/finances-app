@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react"
+import { useState } from "react";
+import Header from "src/components/Header";
+import TableTransactions from "src/components/TableTransactions";
 
 // interface ITransaction {
 //   amount: number
@@ -25,7 +27,7 @@ import { useEffect, useState } from "react"
 // }
 
 export default function index() {    // { transactions }: HomeProps
-  const [userName, setUserName] = useState<string | null>('')
+  const [showTable, setShowTable] = useState(true);
   // const [transactions, setTransactions] = useState<ITransaction[]>([])
 
   // useEffect(() => {
@@ -36,17 +38,21 @@ export default function index() {    // { transactions }: HomeProps
   //     setTransactions(transactionDescriptions)
   //   })
   // }, [])
-  useEffect(() => {
-    setUserName(localStorage.getItem("finances-userName"))
-  }, [])
-
-
-
 
   return (
     <>
-      <h1>DASHBOARD</h1>
-      <h1>Olá, <b>{userName}</b></h1>
+      <Header />
+      <div className="flex justify-evenly py-5 text-xl">
+        <button onClick={() => setShowTable(true)}><h1 className="hover:text-purple-900 hover:font-bold">Carteira</h1></button>
+        <button onClick={() => setShowTable(false)} className="hover:text-purple-900 hover:font-bold">Dashboard</button>
+      </div>
+
+      {
+        showTable ?
+        <TableTransactions />
+        : <p>DASHBOARD</p>
+      }
+      {/* <h1>Olá, <b>{userName}</b></h1> */}
       {/* <ul className="list-disc p-10">
         {
           transactions.length > 0 && transactions.map(item => <li key={item.description}>{item.description}</li>)

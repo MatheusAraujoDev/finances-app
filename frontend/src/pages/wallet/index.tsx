@@ -1,43 +1,38 @@
-import { useState } from "react";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from "react";
 import Header from "src/components/Header";
 import TableTransactions from "src/components/TableTransactions";
+import { api } from "src/services/api";
 
-// interface ITransaction {
-//   amount: number
-//   description: string
-//   category: string
-//   date: string
-//   userId: string
-// }
+interface ITransaction {
+  amount: number
+  description: string
+  category: string
+  date: string
+  userId: string
+}
 
-
-// interface HomeProps {
-//   transactions: ITransaction[];
-// }
-
-// export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-//   const response = await axios.get<ITransaction[]>('http://localhost:3001/transactions');
-//   const transactions = response.data;
-
-//   return {
-//     props: {
-//       transactions
-//     }
-//   }
-// }
 
 export default function index() {    // { transactions }: HomeProps
   const [showTable, setShowTable] = useState(true);
-  // const [transactions, setTransactions] = useState<ITransaction[]>([])
+  const [transactions, setTransactions] = useState<ITransaction[]>([])
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   fetch('http://localhost:3001/transactions')
-  //   .then(response => response.json())
-  //   .then((data: ITransaction[]) => {
-  //     const transactionDescriptions = data.map(item => item)
-  //     setTransactions(transactionDescriptions)
-  //   })
-  // }, [])
+  async function getTransactions() {
+    const token = localStorage.getItem('finances-token');
+    if(token) {
+      const result = await api.get<ITransaction[]>("/transactions", { headers: { Authorization: 'Bearer ' + token } })
+      setTransactions(result.data)
+
+      api.defaults.headers.common.authorization = 'Bearer ' + token;
+    } else {
+      router.push("/")
+    }
+  }
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
 
   return (
     <>
@@ -49,21 +44,9 @@ export default function index() {    // { transactions }: HomeProps
 
       {
         showTable ?
-        <TableTransactions />
+        <TableTransactions transactions={transactions} />
         : <p>DASHBOARD</p>
       }
-      {/* <h1>Olá, <b>{userName}</b></h1> */}
-      {/* <ul className="list-disc p-10">
-        {
-          transactions.length > 0 && transactions.map(item => <li key={item.description}>{item.description}</li>)
-        }
-      </ul> */}
-
-      {/* <ul className="list-disc p-10">
-        {
-          transactions.length > 0 && transactions.map(item => <li key={item.description}>{item.description}</li>)
-        }
-      </ul> */}
     </>
   )
 }

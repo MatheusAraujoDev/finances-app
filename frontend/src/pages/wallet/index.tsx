@@ -37,16 +37,18 @@ export default function index() {
   return (
     <>
       <Header />
-      <div className="flex justify-evenly py-5 text-xl">
+      <div className="flex justify-evenly pt-16 text-xl">
         <button onClick={() => setShowTable(true)}><h1 className="hover:text-purple-900 hover:font-bold">Carteira</h1></button>
         <button onClick={() => setShowTable(false)} className="hover:text-purple-900 hover:font-bold">Dashboard</button>
       </div>
 
-      {
-        showTable ?
-        <TableTransactions transactions={transactions} />
-        : <p>DASHBOARD</p>
-      }
+        {
+          showTable ?
+          <TableTransactions transactions={transactions} />
+          : <p>DASHBOARD</p>
+        }
+
+        {(showTable === true && transactions.length === 0) && <h1 className='flex justify-center pt-7 text-purple-900 text-xl'>Adicione seu primeiro item à carteira!</h1>}
     </>
   )
 }

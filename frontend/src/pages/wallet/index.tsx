@@ -5,6 +5,7 @@ import TableTransactions from "src/components/TableTransactions";
 import { api } from "src/services/api";
 
 interface ITransaction {
+  id: string
   amount: number
   description: string
   category: string
@@ -12,8 +13,7 @@ interface ITransaction {
   userId: string
 }
 
-
-export default function index() {    // { transactions }: HomeProps
+export default function index() {
   const [showTable, setShowTable] = useState(true);
   const [transactions, setTransactions] = useState<ITransaction[]>([])
   const router = useRouter();

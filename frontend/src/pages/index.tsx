@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import AccountForm from "src/components/AccountForm";
 import { api } from 'src/services/api';
+import LanguageSelect from "../components/LanguageSelect";
 
 type ILoginResponse = {
   token: string;
@@ -55,6 +56,7 @@ export default function Home() {
           }
         }}
       />
+      <LanguageSelect />
     </div>
     
   )

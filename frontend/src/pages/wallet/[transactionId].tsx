@@ -3,8 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { BsPencil, BsTrash3Fill } from "react-icons/bs";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from "src/components/Header";
 import { api } from "src/services/api";
+import Swal from "sweetalert2";
 
 interface ITransaction {
   id: string
@@ -34,6 +37,36 @@ export default function Transaction() {
     .catch(() => router.push("/"))
   }
 
+  async function editTransaction(id: string | undefined) {
+    toast.success("Item Editado ;)")
+  }
+
+  async function deleteTransaction(id: string | undefined) {
+    const swalResponse = await Swal.fire({
+      title: 'Tem certeza que deseja excluir esse item de sua carteira?',
+      text: 'Ele será deletado permanentemente',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+    })
+    if(swalResponse.isConfirmed) {
+      try {
+        await api.delete("/transactions", { data: { ids: id } })
+        await router.push("/wallet")
+        Swal.fire(
+          'Deletado!',
+          'Item deletado com sucesso.',
+          'success'
+        )
+      } catch (error) {
+        toast.error('Erro ao deletar item!');
+      }
+    }
+  }
+
   useEffect(() => {
     getTransactionById();
   }, []);
@@ -42,7 +75,8 @@ export default function Transaction() {
     <>
       <Header />
       <div className="text-4xl text-center py-6 pt-32">DETALHES DA TRANSAÇÃO</div>
-      
+      <ToastContainer />
+
       <main className="flex justify-center">
         <div className="flex flex-col justify-center items-center card shadow-2xl bg-white rounded-lg w-1/4 h-60">
           <p><b className="text-lg">Valor: </b> {transaction?.amount}</p>
@@ -50,8 +84,8 @@ export default function Transaction() {
           <p><b className="text-lg">Categoria: </b> {transaction?.category}</p>
           <p><b className="text-lg">Data: </b> {transaction?.date ? format(new Date(transaction?.date), 'dd/MM/yyyy') : '-'}</p>
           <p className="flex gap-10 pt-5">
-            <button><BsPencil /></button>
-            <button><BsTrash3Fill /></button>
+            <button onClick={() => editTransaction(transaction?.id)}><BsPencil size={20} /></button>
+            <button onClick={() => deleteTransaction(transaction?.id)}><BsTrash3Fill size={20} /></button>
           </p>
         </div>
       </main>

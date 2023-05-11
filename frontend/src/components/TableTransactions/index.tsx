@@ -41,7 +41,7 @@ export default function index({ transactions }: IGetTransactionsProps ) {
             <th>Valor</th>
             <th>Descrição</th>
             <th>Categoria</th>
-            <th>Data</th>
+            <th>Criada em</th>
             {/* <th>Opções</th> */}
           </tr>
         </thead>

@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Header from "src/components/Header";
 import TableTransactions from "src/components/TableTransactions";
 import { api } from "src/services/api";
@@ -15,7 +17,7 @@ interface ITransaction {
 
 export default function index() {
   const [showTable, setShowTable] = useState(true);
-  const [transactions, setTransactions] = useState<ITransaction[]>([])
+  const [transactions, setTransactions] = useState<ITransaction[]>([]);
   const router = useRouter();
 
   async function getTransactions() {
@@ -37,14 +39,15 @@ export default function index() {
   return (
     <>
       <Header />
-      <div className="flex justify-evenly pt-16 text-xl">
+      <ToastContainer />
+      <div className="flex justify-evenly pt-10 text-xl">
         <button onClick={() => setShowTable(true)}><h1 className="hover:text-purple-900 hover:font-bold">Carteira</h1></button>
         <button onClick={() => setShowTable(false)} className="hover:text-purple-900 hover:font-bold">Dashboard</button>
       </div>
 
         {
           showTable ?
-          <TableTransactions transactions={transactions} />
+          <TableTransactions transactions={transactions} getTransactions={getTransactions} />
           : <p>DASHBOARD</p>
         }
 

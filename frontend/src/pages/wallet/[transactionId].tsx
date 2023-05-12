@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
 import { BsPencil, BsTrash3Fill, BsXCircleFill } from "react-icons/bs";
@@ -46,7 +45,6 @@ export default function Transaction() {
     await api.get<ITransaction>(`/transactions/${transactionId}`, { headers: { Authorization: 'Bearer ' + token } })
     .then(res => {
       if(res.data) {
-        console.log('DATAAAAAAAAAA', res.data)
         setTransaction(res.data)
         setAmount(res.data.amount)
         setDescription(res.data.description)
@@ -176,10 +174,8 @@ export default function Transaction() {
       </ReactModal>
 
       <div className="flex justify-center pt-4">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-          <Link href="/wallet">
+        <button onClick={() => router.push("/wallet")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Voltar
-          </Link>
         </button>
       </div>
     </>

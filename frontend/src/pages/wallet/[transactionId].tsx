@@ -22,10 +22,11 @@ const modalStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    border: '1px solid black',
+    border: '2px solid black',
+    borderRadius: '10px',
     margin: '0 auto',
     maxHeight: '35rem',
-    maxWidth: '35rem',
+    maxWidth: '576px',
   }
 };
 
@@ -142,33 +143,33 @@ export default function Transaction() {
         style={modalStyles}
       >
         <div className="w-3/4">
-        <div className="flex justify-end"><button onClick={closeEditTransactionModal}><BsXCircleFill color="#FF0000" size={25} /></button></div>
+        <div className="absolute right-6 top-6 border-0 bg-transparent"><button onClick={closeEditTransactionModal}><BsXCircleFill color="#FF0000" size={25} /></button></div>
         
           <form onSubmit={handleEdit} className="flex flex-col justify-center items-center">
-            <h1 className="text-2xl pb-10">EDITE SUA TRANSAÇÃO</h1>
+            <h1 className="text-2xl pb-6 text-center">EDITE SUA TRANSAÇÃO</h1>
 
-            <div>
+            <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
                 Valor
               </label>
               <input value={amount} placeholder="Valor" type="number" onChange={(e) => setAmount(Number(e.target.value))} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" />
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
                 Descrição
               </label>
               <input value={description} onChange={(e) => setDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" /* placeholder="Descrição" */ />
             </div>
 
-            <div>
+            <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
                 Categoria
               </label>
               <input value={category} onChange={(e) => setCategory(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="category" type="text" /* placeholder="Categoria" */ />
             </div>
 
-            <div className="flex justify-center mt-5 bg-teal-200"><button type="submit">Salvar</button></div>
+            <button className="flex justify-center mt-5 w-full bg-[#33cc95] py-2 px-3 hover:brightness-90 transition duration-200 text-[#fff]" type="submit">Salvar</button>
           </form>
         </div>
       </ReactModal>

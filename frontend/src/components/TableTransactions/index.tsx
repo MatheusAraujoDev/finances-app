@@ -6,6 +6,9 @@ import { FcPlus } from 'react-icons/fc';
 import ReactModal from "react-modal";
 import { toast } from "react-toastify";
 import { api } from "src/services/api";
+import currencyToNumber from "src/utils/currencyToNumber";
+import numberToCurrency from "src/utils/numberToCurrency";
+import onlyNumbers from "src/utils/onlyNumbers";
 
 interface ITransaction {
   id: string
@@ -39,11 +42,16 @@ export default function index({ transactions, getTransactions }: IGetTransaction
 
   //modal fields
   const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
   const [category, setCategory] = useState("")
   
   const [expenses, setExpenses] = useState(0);
+
+  const handleCurrency = (value: string) => {
+    const string = onlyNumbers(value)
+    setAmount(string);
+  }
 
   const openSelectedTransaction = (id: string) => {
     router.push(`/wallet/${id}`)
@@ -55,15 +63,15 @@ export default function index({ transactions, getTransactions }: IGetTransaction
   }
 
   const clearTransactionFields = () => {
-    setAmount(0)
+    setAmount("")
     setDescription("")
     setCategory("")
   }
 
   const handleAdd = async (e: FormEvent) => {
     e.preventDefault();
-    try {      
-      await api.post("/transactions", { description, amount, category, date: new Date() });
+    try {
+      await api.post("/transactions", { description, amount: currencyToNumber(amount), category, date: new Date() });
       getTransactions();
       toast.success('Transação adicionada com sucesso!');
     } catch (error) {
@@ -82,7 +90,7 @@ export default function index({ transactions, getTransactions }: IGetTransaction
   return (
     <div className="flex flex-col items-center justify-center pt-20">
       <div className="w-4/5"><button type="button" onClick={() => setIsNewTransactionModalOpen(true)}><FcPlus size={35}/></button></div>
-      <div className="w-4/5 text-3xl pb-2">Suas Despesas: R$ <span className="text-red-600">{expenses}</span></div>
+      <div className="w-4/5 text-3xl pb-2">Suas Despesas: R$ <span className="text-red-600">{expenses > 0 ? numberToCurrency(expenses) : "0"}</span></div>
       <table className="table-auto w-4/5 text-lg">
         <thead className="bg-gray-300">
           <tr>
@@ -96,7 +104,7 @@ export default function index({ transactions, getTransactions }: IGetTransaction
           {
             transactions.length > 0 ? transactions.map(item => 
               <tr key={item.description} onClick={() => openSelectedTransaction(item.id)} className="text-center hover:bg-purple-100 cursor-pointer">
-                <td>R$ {item.amount}</td>
+                <td>R$ {item.amount ? numberToCurrency(item.amount) : "0"}</td>
                 <td>{item.description}</td>
                 <td>{item.category}</td>
                 <td>{format(new Date(item.date), 'dd/MM/yyyy')}</td>
@@ -130,7 +138,7 @@ export default function index({ transactions, getTransactions }: IGetTransaction
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
                 Valor
               </label>
-              <input value={amount} placeholder="Valor" type="number" onChange={(e) => setAmount(Number(e.target.value))} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" />
+              <input value={numberToCurrency(amount)} onChange={event => handleCurrency(event.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" />
             </div>
 
             <div className="w-full">

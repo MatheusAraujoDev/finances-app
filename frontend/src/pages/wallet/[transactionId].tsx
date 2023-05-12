@@ -6,6 +6,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from "src/components/Header";
 import { api } from "src/services/api";
+import currencyToNumber from "src/utils/currencyToNumber";
+import numberToCurrency from "src/utils/numberToCurrency";
+import onlyNumbers from "src/utils/onlyNumbers";
 import Swal from "sweetalert2";
 
 interface ITransaction {
@@ -37,9 +40,14 @@ export default function Transaction() {
   const transactionId: any = router.query.transactionId;
 
   //modal fields
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
   const [category, setCategory] = useState("")
+
+  const handleCurrency = (value: string) => {
+    const string = onlyNumbers(value)
+    setAmount(string);
+  }
 
   async function getTransactionById() {
     const token = localStorage.getItem('finances-token');
@@ -47,7 +55,7 @@ export default function Transaction() {
     .then(res => {
       if(res.data) {
         setTransaction(res.data)
-        setAmount(res.data.amount)
+        setAmount(numberToCurrency(res.data.amount))
         setDescription(res.data.description)
         setCategory(res.data.category)
       } else {
@@ -64,7 +72,7 @@ export default function Transaction() {
 
   const clearTransactionFields = () => {
     if(transaction !== undefined){
-      setAmount(transaction.amount)
+      setAmount(numberToCurrency(transaction.amount))
       setDescription(transaction.description)
       setCategory(transaction.category)
     }
@@ -74,7 +82,7 @@ export default function Transaction() {
     e.preventDefault();
 
     try {
-      await api.put(`/transactions/${transaction?.id}`, {amount, description, category})
+      await api.put(`/transactions/${transaction?.id}`, {amount: currencyToNumber(amount), description, category})
       await router.push("/wallet")
       Swal.fire(
         'Editado!',
@@ -126,7 +134,7 @@ export default function Transaction() {
 
       <main className="flex justify-center">
         <div className="flex flex-col justify-center items-center card shadow-2xl bg-white rounded-lg w-1/4 h-60">
-          <p><b className="text-lg">Valor: </b>R$ {amount}</p>
+          <p><b className="text-lg">Valor: </b>R$ {amount ? numberToCurrency(amount) : "0"}</p>
           <p><b className="text-lg">Descrição: </b> {description}</p>
           <p><b className="text-lg">Categoria: </b> {category}</p>
           <p className="flex gap-10 pt-5">
@@ -152,7 +160,7 @@ export default function Transaction() {
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
                 Valor
               </label>
-              <input value={amount} placeholder="Valor" type="number" onChange={(e) => setAmount(Number(e.target.value))} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" />
+              <input value={numberToCurrency(amount)} onChange={event => handleCurrency(event.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" />
             </div>
 
             <div className="w-full">

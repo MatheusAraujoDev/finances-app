@@ -11,7 +11,7 @@ interface ICreateTransactionService {
 export class CreateTransactionService {
   async execute({ description, amount, category, date, userId }: ICreateTransactionService) {
 
-    const transactionAlreadyExists = await prisma.transaction.findFirst({ where: { description } });
+    const transactionAlreadyExists = await prisma.transaction.findFirst({ where: { description, userId } });
     if(transactionAlreadyExists) {
       throw new Error('Transaction already exists!')
     }

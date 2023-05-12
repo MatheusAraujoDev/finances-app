@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { BsXCircleFill } from "react-icons/bs";
 import { FcPlus } from 'react-icons/fc';
 import ReactModal from "react-modal";
@@ -42,6 +42,8 @@ export default function index({ transactions, getTransactions }: IGetTransaction
   const [amount, setAmount] = useState(0)
   const [description, setDescription] = useState("")
   const [category, setCategory] = useState("")
+  
+  const [expenses, setExpenses] = useState(0);
 
   const openSelectedTransaction = (id: string) => {
     router.push(`/wallet/${id}`)
@@ -72,9 +74,15 @@ export default function index({ transactions, getTransactions }: IGetTransaction
     handleCloseNewTransactionModal();
   }
 
+  useEffect(() => {
+    const total = transactions.length > 0 ? transactions.reduce((acc, item) => acc + item.amount, 0) : 0;
+    setExpenses(total);
+  }, [transactions]);
+
   return (
     <div className="flex flex-col items-center justify-center pt-20">
       <div className="w-4/5"><button type="button" onClick={() => setIsNewTransactionModalOpen(true)}><FcPlus size={35}/></button></div>
+      <div className="w-4/5 text-3xl pb-2">Suas Despesas: R$ <span className="text-red-600">{expenses}</span></div>
       <table className="table-auto w-4/5 text-lg">
         <thead className="bg-gray-300">
           <tr>

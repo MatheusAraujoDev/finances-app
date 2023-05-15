@@ -33,6 +33,9 @@ export default function index() {
     }
   }
 
+  const isWalletSelected = showTable ? 'text-purple-900 font-bold text-2xl underline' : 'text-black';
+  const isDashboardSelected = !showTable ? 'text-purple-900 font-bold text-2xl underline' : 'text-black';
+
   useEffect(() => {
     getTransactions();
   }, []);
@@ -42,8 +45,8 @@ export default function index() {
       <Header />
       <ToastContainer />
       <div className="flex justify-evenly pt-10 text-xl">
-        <button onClick={() => setShowTable(true)}><h1 className="hover:text-purple-900 hover:font-bold">Carteira</h1></button>
-        <button onClick={() => setShowTable(false)} className="hover:text-purple-900 hover:font-bold">Dashboard</button>
+        <button onClick={() => setShowTable(true)}><h1 className={isWalletSelected}>Carteira</h1></button>
+        <button onClick={() => setShowTable(false)} className={isDashboardSelected}>Dashboard</button>
       </div>
 
         {

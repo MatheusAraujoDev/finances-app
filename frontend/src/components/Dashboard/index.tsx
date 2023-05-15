@@ -1,5 +1,6 @@
 
-import { Card, DonutChart, Title } from "@tremor/react";
+import { CheckCircleIcon, ExclamationIcon } from "@heroicons/react/solid";
+import { Callout, Card, DonutChart, Title } from "@tremor/react";
 import numberToCurrency from "src/utils/numberToCurrency";
 
 interface ITransaction {
@@ -49,8 +50,7 @@ export default function Dashboard({ transactions }: IDashboardProps) {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center pt-24">
-
+    <div className="flex flex-col items-center justify-center pt-16">
       <Card className="max-w-lg">
       <Title>Despesas por categoria</Title>
         <DonutChart
@@ -62,6 +62,26 @@ export default function Dashboard({ transactions }: IDashboardProps) {
           valueFormatter={valueFormatter}
           colors={["violet", "amber", "indigo", "rose", "cyan", "slate"]}
         />
+
+      {
+        transactions.length > 0 && (
+          <>
+            <Title>Algumas curiosidades e dicas de Controle Financeiro</Title>
+            <Callout
+              className="mt-4"
+              title="Voce sabia que o segundo semestre de 2022 iniciou com índice de 78% das famílias endividadas ? Já a proporção de consumidores com contas ou dívidas atrasadas, os inadimplentes, chegou ao maior patamar em 12 anos: 29%."
+              icon={ExclamationIcon}
+            />
+            <Callout
+              className="mt-4"
+              title="A maioria das pessoas ficam presas em um círculo vicioso em que trabalham apenas para pagar suas contas. Se tiver oportunidade busque guardar parte de seu salário todos os meses, é recomendado que você guarde ao menos 10% dele"
+              icon={CheckCircleIcon}
+              color="teal"
+            />
+          </>
+        )
+      }
+
       </Card>
     </div>
   )

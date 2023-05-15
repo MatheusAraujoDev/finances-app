@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Dashboard from 'src/components/Dashboard';
 import Header from "src/components/Header";
 import TableTransactions from "src/components/TableTransactions";
 import { api } from "src/services/api";
@@ -48,7 +49,7 @@ export default function index() {
         {
           showTable ?
           <TableTransactions transactions={transactions} getTransactions={getTransactions} />
-          : <p>DASHBOARD</p>
+          : <Dashboard transactions={transactions} />
         }
 
         {(showTable === true && transactions.length === 0) && <h1 className='flex justify-center pt-7 text-purple-900 text-xl'>Adicione seu primeiro item à carteira!</h1>}

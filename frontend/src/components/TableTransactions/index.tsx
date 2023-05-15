@@ -90,7 +90,7 @@ export default function index({ transactions, getTransactions }: IGetTransaction
   return (
     <div className="flex flex-col items-center justify-center pt-20">
       <div className="w-4/5"><button type="button" onClick={() => setIsNewTransactionModalOpen(true)}><FcPlus size={35}/></button></div>
-      <div className="w-4/5 text-3xl pb-2">Suas Despesas: R$ <span className="text-red-600">{expenses > 0 ? numberToCurrency(expenses) : "0"}</span></div>
+      <div className="w-4/5 text-3xl pb-2">Suas Despesas: <span className="text-red-600">R$ {expenses > 0 ? numberToCurrency(expenses) : "0"}</span></div>
       <table className="table-auto w-4/5 text-lg">
         <thead className="bg-gray-300">
           <tr>

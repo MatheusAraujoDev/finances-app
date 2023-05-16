@@ -53,6 +53,12 @@
       "save": "Salvar",
       "goBack": "Voltar"
     },
+    "dashboard": {
+      "title": "Despesas por categoria",
+      "tipsTitle": "Algumas curiosidades e dicas de Controle Financeiro",
+      "tip1": "Voce sabia que o segundo semestre de 2022 iniciou com índice de 78% das famílias endividadas ? Já a proporção de consumidores com contas ou dívidas atrasadas, os inadimplentes, chegou ao maior patamar em 12 anos: 29%.",
+      "tip2": "A maioria das pessoas ficam presas em um círculo vicioso em que trabalham apenas para pagar suas contas. Se tiver oportunidade busque guardar parte de seu salário todos os meses, é recomendado que você guarde ao menos 10% dele."
+    },
     "currency": "R$"
   }
 }

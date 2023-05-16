@@ -1,6 +1,7 @@
 
 import { CheckCircleIcon, ExclamationIcon } from "@heroicons/react/solid";
 import { Callout, Card, DonutChart, Title } from "@tremor/react";
+import { useTranslation } from "react-i18next";
 import numberToCurrency from "src/utils/numberToCurrency";
 
 interface ITransaction {
@@ -21,11 +22,12 @@ interface ICategoryArray {
   category: string
 }
 
-const valueFormatter = (number: number) =>
-  `R$ ${numberToCurrency(number)}`;
-
 export default function Dashboard({ transactions }: IDashboardProps) {
-  
+  const { t } = useTranslation();
+
+  const valueFormatter = (number: number) =>
+  `${t("currency")} ${numberToCurrency(number)}`;
+
   const transactionsByCategory = transactions.map(item => {
     return {
       category: item.category.toLocaleLowerCase(),
@@ -52,7 +54,7 @@ export default function Dashboard({ transactions }: IDashboardProps) {
   return (
     <div className="flex flex-col items-center justify-center pt-16">
       <Card className="max-w-lg">
-      <Title>Despesas por categoria</Title>
+      <Title>{t("dashboard.title")}</Title>
         <DonutChart
           className="mt-6"
           data={finalGraphArray}
@@ -66,15 +68,15 @@ export default function Dashboard({ transactions }: IDashboardProps) {
       {
         transactions.length > 0 && (
           <>
-            <Title>Algumas curiosidades e dicas de Controle Financeiro</Title>
+            <Title>{t("dashboard.tipsTitle")}</Title>
             <Callout
               className="mt-4"
-              title="Voce sabia que o segundo semestre de 2022 iniciou com índice de 78% das famílias endividadas ? Já a proporção de consumidores com contas ou dívidas atrasadas, os inadimplentes, chegou ao maior patamar em 12 anos: 29%."
+              title={t("dashboard.tip1")}
               icon={ExclamationIcon}
             />
             <Callout
               className="mt-4"
-              title="A maioria das pessoas ficam presas em um círculo vicioso em que trabalham apenas para pagar suas contas. Se tiver oportunidade busque guardar parte de seu salário todos os meses, é recomendado que você guarde ao menos 10% dele"
+              title={t("dashboard.tip2")}
               icon={CheckCircleIcon}
               color="teal"
             />

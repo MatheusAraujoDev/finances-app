@@ -53,6 +53,12 @@
       "save": "Save",
       "goBack": "Go Back"
     },
+    "dashboard": {
+      "title": "Expenses by category",
+      "tipsTitle": "Some Curiosities and Financial Control Tips",
+      "tip1": "Did you know that the second half of 2022 started with an index of 78% of indebted families? The proportion of consumers with overdue bills or debts, the defaulters, reached the highest level in 12 years: 29%.",
+      "tip2": "Most people get trapped in a vicious circle where they work just to pay their bills. If you have the opportunity, try to save part of your salary every month, it is recommended that you save at least 10% of it."
+    },
     "currency": "$"
   }
 }

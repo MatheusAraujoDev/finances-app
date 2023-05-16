@@ -24,6 +24,35 @@
       "createdAt": "Created At",
       "empty": "Add your first item to the wallet!"
     },
+    "modalTransaction": {
+      "add": "CREATE A NEW TRANSACTION",
+      "edit": "EDIT YOUR TRANSACTION",
+      "new": "Transaction added successfully!",
+      "createError": "Error creating new item!",
+      "edited": "Edited!",
+      "editedMessage": "Transaction successfully edited!",
+      "editError": "Error editing item!",
+      "deleted": "Deleted!",
+      "deletedMessage": "Successfully deleted transaction!",
+      "deleteError": "Error deleting item!",
+      "deleteWarning": "It will be permanently deleted",
+      "deleteQuestion": "Are you sure you want to delete this item from your wallet?",
+      "value": "Value",
+      "description": "Description",
+      "category": "Category",
+      "save": "Save",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    },
+    "transactionDetails": {
+      "title": "TRANSACTION DETAILS",
+      "value": "Value",
+      "description": "Description",
+      "category": "Category",
+      "createdAt": "Created At",
+      "save": "Save",
+      "goBack": "Go Back"
+    },
     "currency": "$"
   }
 }

@@ -75,9 +75,9 @@ export default function index({ transactions, getTransactions }: IGetTransaction
     try {
       await api.post("/transactions", { description, amount: currencyToNumber(amount), category, date: new Date() });
       getTransactions();
-      toast.success('Transação adicionada com sucesso!');
+      toast.success(t("modalTransaction.new"));
     } catch (error) {
-      toast.error('Erro ao criar novo item!');
+      toast.error(t("modalTransaction.createError"));
     }
 
     clearTransactionFields();
@@ -106,7 +106,7 @@ export default function index({ transactions, getTransactions }: IGetTransaction
           {
             transactions.length > 0 ? transactions.map(item => 
               <tr key={item.description} onClick={() => openSelectedTransaction(item.id)} className="text-center hover:bg-purple-100 cursor-pointer">
-                <td>R$ {item.amount ? numberToCurrency(item.amount) : "0"}</td>
+                <td>{t("currency")} {item.amount ? numberToCurrency(item.amount) : "0"}</td>
                 <td>{item.description}</td>
                 <td>{item.category}</td>
                 <td>{format(new Date(item.date), 'dd/MM/yyyy')}</td>
@@ -134,30 +134,30 @@ export default function index({ transactions, getTransactions }: IGetTransaction
           <div className="absolute right-6 top-6 border-0 bg-transparent"><button onClick={handleCloseNewTransactionModal}><BsXCircleFill color="#FF0000" size={28} /></button></div>
           
           <form onSubmit={handleAdd} className="flex flex-col justify-center items-center">
-            <h1 className="text-2xl pb-6 text-center">CRIE UMA NOVA TRANSAÇÃO</h1>
+            <h1 className="text-2xl pb-6 text-center">{t("modalTransaction.add")}</h1>
 
             <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
-                Valor
+                {t("modalTransaction.value")}
               </label>
               <input value={numberToCurrency(amount)} onChange={event => handleCurrency(event.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" />
             </div>
 
             <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                Descrição
+                {t("modalTransaction.description")}
               </label>
               <input value={description} onChange={(e) => setDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" /* placeholder="Descrição" */ />
             </div>
 
             <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
-                Categoria
+                {t("modalTransaction.category")}
               </label>
               <input value={category} onChange={(e) => setCategory(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="category" type="text" /* placeholder="Categoria" */ />
             </div>
 
-            <button className="flex justify-center mt-5 w-full bg-[#33cc95] py-2 px-3 hover:brightness-90 transition duration-200 text-[#fff]" type="submit">Salvar</button>
+            <button className="flex justify-center mt-5 w-full bg-[#33cc95] py-2 px-3 hover:brightness-90 transition duration-200 text-[#fff]" type="submit">{t("modalTransaction.save")}</button>
           </form>
          </div>
       </ReactModal>

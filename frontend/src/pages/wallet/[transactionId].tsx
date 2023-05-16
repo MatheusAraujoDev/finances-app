@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { BsPencil, BsTrash3Fill, BsXCircleFill } from "react-icons/bs";
 import ReactModal from "react-modal";
 import { ToastContainer, toast } from 'react-toastify';
@@ -38,6 +39,7 @@ export default function Transaction() {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const router = useRouter();
   const transactionId: any = router.query.transactionId;
+  const { t } = useTranslation();
 
   //modal fields
   const [amount, setAmount] = useState("")
@@ -85,12 +87,12 @@ export default function Transaction() {
       await api.put(`/transactions/${transaction?.id}`, {amount: currencyToNumber(amount), description, category})
       await router.push("/wallet")
       Swal.fire(
-        'Editado!',
-        'Transação editada com sucesso!',
+        `${t("modalTransaction.edited")}`,
+        `${t("modalTransaction.editedMessage")}`,
         'success'
       )
     } catch (error) {
-      toast.error('Erro ao editar item!');
+      toast.error(t("modalTransaction.editError"));
     }
     clearTransactionFields();
     closeEditTransactionModal();
@@ -98,26 +100,26 @@ export default function Transaction() {
 
   async function deleteTransaction(id: string | undefined) {
     const swalResponse = await Swal.fire({
-      title: 'Tem certeza que deseja excluir esse item de sua carteira?',
-      text: 'Ele será deletado permanentemente',
+      title: `${t("modalTransaction.deleteQuestion")}`,
+      text: `${t("modalTransaction.deleteWarning")}`,
       icon: 'info',
       showCancelButton: true,
-      confirmButtonText: 'Confirmar',
+      confirmButtonText: `${t("modalTransaction.confirm")}`,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
+      cancelButtonText: `${t("modalTransaction.cancel")}`,
     })
     if(swalResponse.isConfirmed) {
       try {
         await api.delete("/transactions", { data: { ids: id } })
         await router.push("/wallet")
         Swal.fire(
-          'Deletado!',
-          'Item deletado com sucesso.',
+          `${t("modalTransaction.deleted")}`,
+          `${t("modalTransaction.deletedMessage")}`,
           'success'
         )
       } catch (error) {
-        toast.error('Erro ao deletar item!');
+        toast.error(t("modalTransaction.deleteError"));
       }
     }
   }
@@ -129,14 +131,14 @@ export default function Transaction() {
   return (
     <>
       <Header />
-      <div className="text-4xl text-center py-6 pt-32">DETALHES DA TRANSAÇÃO</div>
+      <div className="text-4xl text-center py-6 pt-32">{t("transactionDetails.title")}</div>
       <ToastContainer />
 
       <main className="flex justify-center">
         <div className="flex flex-col justify-center items-center card shadow-2xl bg-white rounded-lg w-1/4 h-60">
-          <p><b className="text-lg">Valor: </b>R$ {amount ? numberToCurrency(amount) : "0"}</p>
-          <p><b className="text-lg">Descrição: </b> {description}</p>
-          <p><b className="text-lg">Categoria: </b> {category}</p>
+          <p><b className="text-lg">{t("transactionDetails.value")}: </b>{t("currency")} {amount ? numberToCurrency(amount) : "0"}</p>
+          <p><b className="text-lg">{t("transactionDetails.description")}: </b> {description}</p>
+          <p><b className="text-lg">{t("transactionDetails.category")}: </b> {category}</p>
           <p className="flex gap-10 pt-5">
             <button onClick={() => setEditModalIsOpen(true)}><BsPencil size={20} /></button>
             <button onClick={() => deleteTransaction(transaction?.id)}><BsTrash3Fill size={20} /></button>
@@ -154,37 +156,37 @@ export default function Transaction() {
         <div className="absolute right-6 top-6 border-0 bg-transparent"><button onClick={closeEditTransactionModal}><BsXCircleFill color="#FF0000" size={25} /></button></div>
         
           <form onSubmit={handleEdit} className="flex flex-col justify-center items-center">
-            <h1 className="text-2xl pb-6 text-center">EDITE SUA TRANSAÇÃO</h1>
+            <h1 className="text-2xl pb-6 text-center">{t("modalTransaction.edit")}</h1>
 
             <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
-                Valor
+                {t("modalTransaction.value")}
               </label>
               <input value={numberToCurrency(amount)} onChange={event => handleCurrency(event.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" />
             </div>
 
             <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                Descrição
+                {t("modalTransaction.description")}
               </label>
               <input value={description} onChange={(e) => setDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" type="text" /* placeholder="Descrição" */ />
             </div>
 
             <div className="w-full">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
-                Categoria
+                {t("modalTransaction.category")}
               </label>
               <input value={category} onChange={(e) => setCategory(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="category" type="text" /* placeholder="Categoria" */ />
             </div>
 
-            <button className="flex justify-center mt-5 w-full bg-[#33cc95] py-2 px-3 hover:brightness-90 transition duration-200 text-[#fff]" type="submit">Salvar</button>
+            <button className="flex justify-center mt-5 w-full bg-[#33cc95] py-2 px-3 hover:brightness-90 transition duration-200 text-[#fff]" type="submit">{t("modalTransaction.save")}</button>
           </form>
         </div>
       </ReactModal>
 
       <div className="flex justify-center pt-4">
         <button onClick={() => router.push("/wallet")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-            Voltar
+          {t("transactionDetails.goBack")}
         </button>
       </div>
     </>

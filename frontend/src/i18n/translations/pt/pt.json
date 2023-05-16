@@ -24,6 +24,35 @@
       "createdAt": "Criada em",
       "empty": "Adicione seu primeiro item à carteira!"
     },
+    "modalTransaction": {
+      "add": "CRIE UMA NOVA TRANSAÇÃO",
+      "edit": "EDITE SUA TRANSAÇÃO",
+      "new": "Transação adicionada com sucesso!",
+      "createError": "Erro ao criar novo item!",
+      "edited": "Editado!",
+      "editedMessage": "Transação editada com sucesso!",
+      "editError": "Erro ao editar item!",
+      "deleted": "Deletada!",
+      "deletedMessage": "Transação deletada com sucesso!",
+      "deleteError": "Erro ao deletar item!",
+      "deleteWarning": "Ele será deletado permanentemente",
+      "deleteQuestion": "Tem certeza que deseja excluir esse item de sua carteira?",
+      "value": "Valor",
+      "description": "Descrição",
+      "category": "Categoria",
+      "save": "Salvar",
+      "confirm": "Confirmar",
+      "cancel": "Cancelar"
+    },
+    "transactionDetails": {
+      "title": "DETALHES DA TRANSAÇÃO",
+      "value": "Valor",
+      "description": "Descrição",
+      "category": "Categoria",
+      "createdAt": "Criada em",
+      "save": "Salvar",
+      "goBack": "Voltar"
+    },
     "currency": "R$"
   }
 }

@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <title>DinDin Wallet</title>
+      <title>Smart Finances</title>
       <link rel="icon" href="/wallet.png" />
       <body>
         <Main />

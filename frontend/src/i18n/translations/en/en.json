@@ -11,6 +11,19 @@
       "registerError": "Fill in all fields!",
       "createUser": "User created successfully!",
       "createUserError": "Something went wrong, please try again!"
-    }
+    },
+    "walletPage": {
+      "welcome": "Welcome",
+      "walletTab": "Wallet",
+      "yourExpenses": "Your Expenses:"
+    },
+    "tableExpenses": {
+      "value": "Value",
+      "description": "Description",
+      "category": "Category",
+      "createdAt": "Created At",
+      "empty": "Add your first item to the wallet!"
+    },
+    "currency": "$"
   }
 }

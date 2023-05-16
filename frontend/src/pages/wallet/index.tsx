@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from 'src/components/Dashboard';
@@ -20,6 +21,7 @@ export default function index() {
   const [showTable, setShowTable] = useState(true);
   const [transactions, setTransactions] = useState<ITransaction[]>([]);
   const router = useRouter();
+  const { t } = useTranslation();
 
   async function getTransactions() {
     const token = localStorage.getItem('finances-token');
@@ -45,7 +47,7 @@ export default function index() {
       <Header />
       <ToastContainer />
       <div className="flex justify-evenly pt-10 text-xl">
-        <button onClick={() => setShowTable(true)}><h1 className={isWalletSelected}>Carteira</h1></button>
+        <button onClick={() => setShowTable(true)}><h1 className={isWalletSelected}>{t("walletPage.walletTab")}</h1></button>
         <button onClick={() => setShowTable(false)} className={isDashboardSelected}>Dashboard</button>
       </div>
 
@@ -55,7 +57,7 @@ export default function index() {
           : <Dashboard transactions={transactions} />
         }
 
-        {(showTable === true && transactions.length === 0) && <h1 className='flex justify-center pt-7 text-purple-900 text-xl'>Adicione seu primeiro item à carteira!</h1>}
+        {(showTable === true && transactions.length === 0) && <h1 className='flex justify-center pt-7 text-purple-900 text-xl'>{t("tableExpenses.empty")}</h1>}
     </>
   )
 }

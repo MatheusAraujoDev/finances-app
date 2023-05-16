@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { BsXCircleFill } from "react-icons/bs";
 import { FcPlus } from 'react-icons/fc';
 import ReactModal from "react-modal";
@@ -45,8 +46,9 @@ export default function index({ transactions, getTransactions }: IGetTransaction
   const [amount, setAmount] = useState("")
   const [description, setDescription] = useState("")
   const [category, setCategory] = useState("")
-  
+
   const [expenses, setExpenses] = useState(0);
+  const { t } = useTranslation();
 
   const handleCurrency = (value: string) => {
     const string = onlyNumbers(value)
@@ -90,14 +92,14 @@ export default function index({ transactions, getTransactions }: IGetTransaction
   return (
     <div className="flex flex-col items-center justify-center pt-20">
       <div className="w-4/5"><button type="button" onClick={() => setIsNewTransactionModalOpen(true)}><FcPlus size={35}/></button></div>
-      <div className="w-4/5 text-3xl pb-2">Suas Despesas: <span className="text-red-600">R$ {expenses > 0 ? numberToCurrency(expenses) : "0"}</span></div>
+      <div className="w-4/5 text-3xl pb-2">{t("walletPage.yourExpenses")} <span className="text-red-600">{t("currency")} {expenses > 0 ? numberToCurrency(expenses) : "0"}</span></div>
       <table className="table-auto w-4/5 text-lg">
         <thead className="bg-gray-300">
           <tr>
-            <th>Valor</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
-            <th>Criada em</th>
+            <th>{t("tableExpenses.value")}</th>
+            <th>{t("tableExpenses.description")}</th>
+            <th>{t("tableExpenses.category")}</th>
+            <th>{t("tableExpenses.createdAt")}</th>
           </tr>
         </thead>
         <tbody>

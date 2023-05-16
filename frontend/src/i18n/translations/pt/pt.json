@@ -11,6 +11,19 @@
       "registerError": "Preencha todos os campos!",
       "createUser": "Usuário criado com sucesso!",
       "createUserError": "Algo deu errado, tente novamente!"
-    }
+    },
+    "walletPage": {
+      "welcome": "Seja bem-vindo(a)",
+      "walletTab": "Carteira",
+      "yourExpenses": "Suas Despesas:"
+    },
+    "tableExpenses": {
+      "value": "Valor",
+      "description": "Descrição",
+      "category": "Categoria",
+      "createdAt": "Criada em",
+      "empty": "Adicione seu primeiro item à carteira!"
+    },
+    "currency": "R$"
   }
 }

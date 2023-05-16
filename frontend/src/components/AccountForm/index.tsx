@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 interface IAccountFormProps {
   isRegister?: boolean;
@@ -9,6 +10,8 @@ interface IAccountFormProps {
 }
 
 export default function AccountForm(props: IAccountFormProps) {
+  const { t } = useTranslation();
+
   return (
     <div className=" w-full bg-purple-900 flex justify-center items-center">
         <div className="w-full max-w-2xl">
@@ -17,9 +20,9 @@ export default function AccountForm(props: IAccountFormProps) {
               props.isRegister &&
               <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                Nome
+                {t("loginPage.name")}
               </label>
-              <input onChange={props.onNameChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
+              <input onChange={props.onNameChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="John Doe" />
             </div>
             }
             <div className="mb-4">
@@ -30,7 +33,7 @@ export default function AccountForm(props: IAccountFormProps) {
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                Password
+                {t("loginPage.password")}
               </label>
               <input onChange={props.onPasswordChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********" />
             </div>
@@ -40,12 +43,12 @@ export default function AccountForm(props: IAccountFormProps) {
               <div className="flex items-center justify-between">
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                   <Link href="/">
-                    Voltar
+                    {t("loginPage.goBackButton")}
                   </Link>
                 </button>
 
                 <button type="submit" className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-                    Salvar
+                  {t("loginPage.saveButton")}
                 </button>
               </div>
 
@@ -56,7 +59,7 @@ export default function AccountForm(props: IAccountFormProps) {
 
                 <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
                   <Link href="/register">
-                    Criar Conta
+                    {t("loginPage.createAccount")}
                   </Link>
                 </button>
               </div>

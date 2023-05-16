@@ -1,0 +1,16 @@
+{
+  "translation": {
+    "loginPage": {
+      "name": "Name",
+      "password": "Password",
+      "username": "Username",
+      "createAccount": "Create account",
+      "saveButton": "Save",
+      "goBackButton": "Go Back",
+      "register": "Register",
+      "registerError": "Fill in all fields!",
+      "createUser": "User created successfully!",
+      "createUserError": "Something went wrong, please try again!"
+    }
+  }
+}

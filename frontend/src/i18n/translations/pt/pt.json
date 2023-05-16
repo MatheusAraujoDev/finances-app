@@ -1,0 +1,16 @@
+{
+  "translation": {
+    "loginPage": {
+      "name": "Nome",
+      "password": "Senha",
+      "username": "Usuário",
+      "createAccount": "Criar conta",
+      "saveButton": "Salvar",
+      "goBackButton": "Voltar",
+      "register": "Cadastre-se",
+      "registerError": "Preencha todos os campos!",
+      "createUser": "Usuário criado com sucesso!",
+      "createUserError": "Algo deu errado, tente novamente!"
+    }
+  }
+}

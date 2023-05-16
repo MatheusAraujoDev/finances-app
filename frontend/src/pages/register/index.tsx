@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import AccountForm from "src/components/AccountForm";
@@ -19,10 +20,11 @@ export default function index() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const {t} = useTranslation();
 
   return (
     <div className="h-screen w-full bg-purple-900 flex flex-col justify-center items-center gap-10">
-      <h1 className="text-white text-4xl">Cadastre-se</h1>
+      <h1 className="text-white text-4xl">{t("loginPage.register")}</h1>
       <ToastContainer />
       <AccountForm
         isRegister={true}
@@ -32,7 +34,7 @@ export default function index() {
         onSubmit={async (e) => {
           e.preventDefault();
           if(!email || !password || !name) {
-            toast.warn("Preencha todos os campos!")
+            toast.warn(t("loginPage.registerError"))
             return;
           }
 
@@ -40,12 +42,12 @@ export default function index() {
             const response = await api.post<IRegisterResponse>("/users", {name, email, password})
 
             if(response.status === 201) {
-              toast.success("Usuário criado com sucesso!")
+              toast.success(t("loginPage.createUser"))
               router.push("/")
             }
 
           } catch (error) {
-            toast.error("Algo deu errado, tente novamente!")
+            toast.error(t("loginPage.createUserError"))
           }
         }}
       />

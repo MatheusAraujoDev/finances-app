@@ -1,13 +1,12 @@
+import { useTranslation } from "react-i18next";
 
 export default function index() {
+  const { i18n } = useTranslation();
+
   return (
-    <select className="form-select px-4 py-3 text-gray-900 text-sm rounded-lg">
-        <option value="br" className="flex items-center">
-          🇧🇷 Português
-        </option>
-        <option value="us" className="flex items-center">
-          🇺🇸 English
-        </option>
-      </select>
+    <div className="flex justify-evenly gap-3">
+      <button className="bg-slate-200 hover:bg-green-300 rounded p-1" onClick={() => i18n.changeLanguage('pt')}>🇧🇷 Pt-BR</button>
+      <button className="bg-slate-200 hover:bg-green-300 rounded p-1" onClick={() => i18n.changeLanguage('en')}>🇺🇸 En-US</button>
+    </div>
   )
 }

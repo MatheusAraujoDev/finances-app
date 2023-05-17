@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import AccountForm from "src/components/AccountForm";
@@ -19,6 +20,7 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <div className="bg-purple-900 h-screen flex flex-col items-center py-14 gap-8">
@@ -33,7 +35,7 @@ export default function Home() {
           e.preventDefault()
           
           if(!email || !password) {
-            toast.warn("Preencha todos os campos!")
+            toast.warn(t("loginPage.registerError"))
             return;
           }
 
@@ -52,7 +54,7 @@ export default function Home() {
             }
           
           } catch (error) {
-            toast.error("Algo deu errado, tente novamente!")
+            toast.error(t("loginPage.createUserError"))
           }
         }}
       />

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import AccountForm from "src/components/AccountForm";
-import { api } from 'src/services/api';
+import AccountForm from "../components/AccountForm";
 import LanguageSelect from "../components/LanguageSelect";
+import { api } from '../services/api';
 
 type ILoginResponse = {
   token: string;
@@ -13,8 +13,8 @@ type ILoginResponse = {
     id: string;
     email: string;
     name: string;
-  }
-}
+  };
+};
 
 export default function Home() {
   const [email, setEmail] = useState('');

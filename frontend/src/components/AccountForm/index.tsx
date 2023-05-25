@@ -13,7 +13,7 @@ export default function AccountForm(props: IAccountFormProps) {
   const { t } = useTranslation();
 
   return (
-    <div className=" w-full bg-purple-900 flex justify-center items-center">
+    <div data-testid="account-form" className=" w-full bg-purple-900 flex justify-center items-center">
         <div className="w-full max-w-2xl">
           <form className="bg-white rounded px-8 pt-6 pb-8 mb-4" onSubmit={props.onSubmit}>
             {

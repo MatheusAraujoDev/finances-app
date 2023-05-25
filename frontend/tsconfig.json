@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "target": "es5",
     "lib": [
       "dom",
       "dom.iterable",
@@ -12,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,21 +21,32 @@
     "strictNullChecks": true,
     "sourceMap": true,
     "outDir": ".build",
-    "rootDir": "./",
+    "rootDir": ".",
     "baseUrl": ".",
+    "target": "esnext"
     // "paths": {
     //   "@/*": [
     //     "./*"
     //   ]
     // }
   },
-  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": [
-    "node_modules"
-  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "jest.config.js"
+  ],
+  "exclude": [
+    "node_modules"
   ]
+  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  // "exclude": [
+  //   "node_modules"
+  // ],
+  // "include": [
+  //   "next-env.d.ts",
+  //   "**/*.ts",
+  //   "**/*.tsx", "jest.config.js"  ]
 }

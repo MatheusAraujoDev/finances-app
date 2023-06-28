@@ -6,6 +6,7 @@ interface IAccountFormProps {
   onNameChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
   onEmailChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
   onPasswordChange: (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
+  formValues: { name: string, email: string, password: string },
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -23,19 +24,24 @@ export default function AccountForm(props: IAccountFormProps) {
                 {t("loginPage.name")}
               </label>
               <input onChange={props.onNameChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="John Doe" />
+              {props.isRegister && props.formValues && props.formValues.name !== '' && props.formValues.name.length < 3 && <p className='text-red-600'>{t("loginPage.nameInputError")}</p>}
             </div>
             }
+
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
                 E-mail
               </label>
               <input onChange={props.onEmailChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" autoFocus placeholder="E-mail" />
+            {props.formValues && props.formValues.email !== '' && !props.formValues.email.includes('@') && !props.formValues.email.includes('.com') && <p className='text-red-600'>{t("loginPage.emailInputError")}</p>}
             </div>
+
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                 {t("loginPage.password")}
               </label>
               <input onChange={props.onPasswordChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********" />
+            {props.formValues && props.formValues.password !== '' && props.formValues.password.length < 6 && <p className='text-red-600'>{t("loginPage.passwordInputError")}</p>}
             </div>
 
             {

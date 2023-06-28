@@ -31,6 +31,7 @@ export default function index() {
         onNameChange={(e) => setName(e.target.value)}
         onEmailChange={(e) => setEmail(e.target.value)}
         onPasswordChange={(e) => setPassword(e.target.value)}
+        formValues={{ name, email, password }}
         onSubmit={async (e) => {
           e.preventDefault();
           if(!email || !password || !name) {

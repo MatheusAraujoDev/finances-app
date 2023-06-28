@@ -10,7 +10,10 @@
       "register": "Register",
       "registerError": "Fill in all fields!",
       "createUser": "User created successfully!",
-      "createUserError": "Something went wrong, please try again!"
+      "createUserError": "Something went wrong, please try again!",
+      "nameInputError": "The name must be at least 3 characters long",
+      "emailInputError": "E-mail must be a valid e-mail",
+      "passwordInputError": "Password must be at least 6 characters long"
     },
     "walletPage": {
       "welcome": "Welcome",

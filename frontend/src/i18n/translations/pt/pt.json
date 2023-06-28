@@ -10,7 +10,10 @@
       "register": "Cadastre-se",
       "registerError": "Preencha todos os campos!",
       "createUser": "Usuário criado com sucesso!",
-      "createUserError": "Algo deu errado, tente novamente!"
+      "createUserError": "Algo deu errado, tente novamente!",
+      "nameInputError": "O nome deve ter ao menos 3 caracteres",
+      "emailInputError": "O e-mail deve ser um e-mail válido",
+      "passwordInputError": "A senha deve ter ao menos 6 caracteres"
     },
     "walletPage": {
       "welcome": "Seja bem-vindo(a)",

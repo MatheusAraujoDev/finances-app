@@ -35,8 +35,8 @@ export default function index() {
     }
   }
 
-  const isWalletSelected = showTable ? 'text-purple-900 font-bold text-2xl underline' : 'text-black';
-  const isDashboardSelected = !showTable ? 'text-purple-900 font-bold text-2xl underline' : 'text-black';
+  const isWalletSelected = showTable ? 'text-purple-900 font-bold text-2xl underline transform hover:translate-y-[-2px] active:translate-y-0' : 'text-black transform hover:translate-y-[-2px] active:translate-y-0';
+  const isDashboardSelected = !showTable ? 'text-purple-900 font-bold text-2xl underline transform hover:translate-y-[-2px] active:translate-y-0' : 'text-black transform hover:translate-y-[-2px] active:translate-y-0';
 
   useEffect(() => {
     getTransactions();

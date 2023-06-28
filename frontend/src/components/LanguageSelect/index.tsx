@@ -5,8 +5,8 @@ export default function index() {
 
   return (
     <div className="flex justify-evenly gap-3">
-      <button className="bg-slate-200 hover:bg-green-300 rounded p-1" onClick={() => i18n.changeLanguage('pt')}>🇧🇷 Pt-BR</button>
-      <button className="bg-slate-200 hover:bg-green-300 rounded p-1" onClick={() => i18n.changeLanguage('en')}>🇺🇸 En-US</button>
+      <button className="bg-slate-200 hover:bg-green-300 rounded p-1 transform hover:translate-y-[-2px] active:translate-y-0" onClick={() => i18n.changeLanguage('pt')}>🇧🇷 Pt-BR</button>
+      <button className="bg-slate-200 hover:bg-green-300 rounded p-1 transform hover:translate-y-[-2px] active:translate-y-0" onClick={() => i18n.changeLanguage('en')}>🇺🇸 En-US</button>
     </div>
   )
 }
